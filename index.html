@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <script type='text/javascript' src='assets/js/lib/paper-full.js'></script>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.1/howler.core.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Bungee|Oswald" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
     <title>Patatap Clone</title>
     <script type="text/paperscript" canvas="myCanvas">
+
+        var active = false;
+
         var circles = [];
 
         var keyData = {
@@ -170,7 +174,14 @@
         };
 
         function onKeyDown(event) {
-            if (keyData[event.key]) {
+
+            if(event.key === "space" && !active){
+                var instructions = document.getElementById("instructions");
+                instructions.parentNode.removeChild(instructions);
+                active = true;
+            }            
+
+            if (keyData[event.key] && active) {
                 var maxPoint = new Point(view.size.width, view.size.height);
                 var randomPoint = new Point.random();
                 var point = maxPoint * randomPoint;
@@ -195,7 +206,13 @@
 </head>
 
 <body>
+    <div id="instructions">
+        <h1>Ratatatap</h1>
+        <div id="subText">
+            <p>Press any letter key to trigger both a sound and randomly placed animation.</p>
+            <p>Press 'Space' to begin.</p>
+        </div>
+    </div>
     <canvas id="myCanvas" resize></canvas>
 </body>
-
-</html>
+</html

@@ -1,3 +1,5 @@
+var active = false;
+
 var circles = [];
 
 var keyData = {
@@ -160,7 +162,12 @@ var keyData = {
 };
 
 function onKeyDown(event) {
-    if (keyData[event.key]) {
+
+    if (event.key ===  'space' && !active){
+        active = true;
+    }
+    
+    if (keyData[event.key] && active) {
         var maxPoint = new Point(view.size.width, view.size.height);
         var randomPoint = new Point.random();
         var point = maxPoint * randomPoint;
